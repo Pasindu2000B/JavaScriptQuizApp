@@ -22,7 +22,8 @@ let q3 = new Question("How Are You Now?", ["Good", "Neurtal", "Worst"]);
 q3.CorrectAns = q3.answers[1];
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let array = [q1, q2, q3];
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Finsished Button adding Function
 let displayFinish = function () {
   if (DisplayedQuestion == array[array.length - 1]) {
     let boxButton = document.getElementById("buttons");
@@ -37,6 +38,8 @@ let displayFinish = function () {
     }
   }
 };
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Show Marks
 let marksShow = function () {
   if (document.getElementById("end") != null) {
     document.getElementById("end").onclick = function () {
@@ -60,7 +63,7 @@ let marksShow = function () {
     };
   }
 };
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Navigate Function
 
 let Navigate = function (DisplayedQ) {
@@ -71,13 +74,19 @@ let Navigate = function (DisplayedQ) {
   let buttons = document.getElementById("buttons");
 
   for (j = 0; j < 3; j++) {
-    Answerbox.appendChild(document.createElement("li"));
+    let option = document.createElement("li");
+    Answerbox.appendChild(option);
     let li = Answerbox.children[j];
     li.innerHTML = DisplayedQ.answers[j];
     x = li.appendChild(document.createElement("input"));
     x.value = DisplayedQ.answers[j];
     x.name = "SelectedAnswer";
     x.type = "radio";
+    if (count == 0) {
+      if (DisplayedQ.answers[j] == DisplayedQ.CorrectAns) {
+        option.style.color = "red";
+      }
+    }
   }
   displayFinish();
   marksShow();
@@ -106,7 +115,7 @@ let Navigate = function (DisplayedQ) {
     }
   }
 };
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Default View
 let count = 10;
 const timer = setInterval(function () {
@@ -123,6 +132,7 @@ let DisplayedQuestion = array[0];
 let i = 0;
 
 Navigate(DisplayedQuestion);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // When clicks Previous Button
 
@@ -136,6 +146,8 @@ document.getElementById("prev").onclick = function () {
   }
 };
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // When clicks Next Button
 document.getElementById("next").onclick = function () {
   i = i + 1;
@@ -148,6 +160,8 @@ document.getElementById("next").onclick = function () {
   }
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 let subs = document.getElementById("submits");
 subs.onclick = function () {
   let selected = document.querySelector('input[name="SelectedAnswer"]:checked');
@@ -158,3 +172,5 @@ subs.onclick = function () {
     localStorage.setItem("arr", JSON.stringify(array));
   }
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
